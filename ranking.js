@@ -1,12 +1,19 @@
 document.addEventListener("DOMContentLoaded", loadRanking);
 
 function loadRanking() {
-  // TODO: API 엔드포인트 수정
-  fetch("/api/ranking")
+  const API_BASE =
+    "https://script.google.com/macros/s/AKfycbw0EmgiHEGglmTZbilB9-ZnydVHxOIkB9-xYcFiw8f1Qd56Xi3T7D17td08Ll9tbNY/exec";
+
+  const tbody = document.getElementById("ranking-body");
+  tbody.innerHTML =
+    "<tr><td colspan='4'>⏳ 랭킹 데이터를 불러오는 중...</td></tr>";
+
+  fetch(`${API_BASE}?action=getranking`)
     .then((res) => res.json())
     .then(showRanking)
-    .catch(() => {
-      document.getElementById("ranking-body").innerHTML =
+    .catch((err) => {
+      console.error(err);
+      tbody.innerHTML =
         "<tr><td colspan='4'>❌ 랭킹 데이터를 불러올 수 없습니다.</td></tr>";
     });
 }
@@ -28,10 +35,8 @@ function showRanking(data) {
 
   data.forEach((r) => {
     shownCount++;
-
-    // 동점자 처리
     if (r.lv === lastLv && r.exp === lastExp) {
-      // rank 그대로 유지
+      // 동점자 순위 유지
     } else {
       lastRank = shownCount;
     }
@@ -43,16 +48,13 @@ function showRanking(data) {
     else if (lastRank === 2) medal = "🥈";
     else if (lastRank === 3) medal = "🥉";
 
-    // 행 생성
     const tr = document.createElement("tr");
-
     tr.innerHTML = `
-      <td>${medal} ${r.name}</td>
-      <td>Lv ${r.lv}</td>
-      <td>⭐ ${r.exp.toLocaleString()}</td>
-      <td>${r.remainExp.toLocaleString()}</td>
-    `;
-
+        <td>${medal} ${r.name}</td>
+        <td>Lv ${r.lv}</td>
+        <td>⭐ ${r.exp.toLocaleString()}</td>
+        <td>${r.remainExp.toLocaleString()}</td>
+      `;
     tbody.appendChild(tr);
   });
 }
