@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <title>파밍 랭킹</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2>🏆 파밍 시스템 RANK 🏆</h2>
-    
-    <table>
-        <thead>
-            <tr>
-                <th>플레이어</th>
-                <th>Lv</th>
-                <th>Exp</th>
-                <th>남은 Exp</th>
-            </tr>
-        </thead>
-        <tbody id="ranking-body"></tbody>
-    </table>
-    <script src="ranking.js" defer></script>
+  <h2>🏆 파밍 랭킹</h2>
+  <table class="ranking-table">
+    <thead>
+      <tr>
+        <th>플레이어</th>
+        <th>레벨</th>
+        <th>경험치</th>
+        <th>다음 레벨까지</th>
+      </tr>
+    </thead>
+    <tbody id="ranking-body">
+      <tr><td colspan="4">⏳ 랭킹 데이터를 불러오는 중...</td></tr>
+    </tbody>
+  </table>
+
+  <script src="ranking.js"></script>
 </body>
 </html>

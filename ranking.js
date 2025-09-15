@@ -12,6 +12,7 @@ function loadRanking() {
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
+      return data; // 다음 then으로 넘겨줌
     })
     .then(showRanking)
     .catch((err) => {

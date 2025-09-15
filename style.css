@@ -212,3 +212,40 @@
     transform: scale(1.05);
   }
   
+
+  /* 랭킹 테이블 */
+.ranking-table {
+    margin: 30px auto;
+    border-collapse: collapse;
+    width: 90%;
+    max-width: 800px;
+    background: rgba(0,0,0,0.7);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  
+  .ranking-table th,
+  .ranking-table td {
+    padding: 12px;
+    border: 1px solid #555;
+    text-align: center;
+  }
+  
+  .ranking-table th {
+    background: #333;
+    color: #ffd700;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #000;
+  }
+  
+  .ranking-table tr:nth-child(even) {
+    background: rgba(255,255,255,0.05);
+  }
+  
+  .ranking-table tr:hover {
+    background: rgba(255,255,255,0.1);
+    transform: scale(1.01);
+    transition: all 0.2s ease;
+  }
+  
