@@ -195,22 +195,24 @@
     align-items: center;
   }
   .menu-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.2em;
+    font-weight: bold;
     width: 500px;
     height: 500px;
-    padding: 20px 40px;
-    font-size: 2rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 12px;
-    background-color: #ff9800;
-    color: white;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
+    color: #fff;
+    background: #ff9800;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: transform 0.2s, background 0.2s;
   }
   .menu-button:hover {
-    background-color: #ffa726;
+    background: #ffa726;
     transform: scale(1.05);
   }
+  
   
 
   /* 랭킹 테이블 */
