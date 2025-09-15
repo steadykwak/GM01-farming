@@ -249,3 +249,23 @@
     transition: all 0.2s ease;
   }
   
+  /* 공통 네비게이션 버튼 */
+.back-home {
+    display: inline-block;
+    margin: 30px auto 0;
+    padding: 12px 24px;
+    font-size: 1em;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(135deg, #ff9800, #ff5722);
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    transition: transform 0.2s, background 0.3s;
+  }
+  
+  .back-home:hover {
+    background: linear-gradient(135deg, #ffa726, #ff7043);
+    transform: scale(1.05);
+  }
+  
