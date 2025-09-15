@@ -10,6 +10,9 @@ function loadRanking() {
 
   fetch(`${API_BASE}?action=getranking`)
     .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+    })
     .then(showRanking)
     .catch((err) => {
       console.error(err);
