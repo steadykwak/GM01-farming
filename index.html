@@ -1,24 +1,56 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <title>파밍 대시보드</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>GM01 Farming System</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #f0fdfa, #f8fafc);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .menu-container {
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 40px;
+      font-size: 2em;
+      color: #0f172a;
+    }
+    .menu-buttons {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+    }
+    .menu-button {
+      padding: 20px 40px;
+      font-size: 1.2em;
+      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+      background-color: #2563eb;
+      color: white;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+    }
+    .menu-button:hover {
+      background-color: #1d4ed8;
+      transform: scale(1.05);
+    }
+  </style>
 </head>
 <body>
-    <h2>⛏️ 파밍을 얼마나 열심히 했는지 볼 수 있는 곳 👩🏻‍🌾</h2>
-    <form id="form" action="">
-        <div class="input-container">
-            <input type="text" id="name" placeholder="이름 입력" />
-            <input type="text" id="phone" placeholder="휴대폰 뒷자리 4자리" maxlength="4" />
-        </div>
-        <button id="searchBtn" type="submit">얼마나 열심히 했는지 보자!</button>
-    </form>
-    
-    <div class="result-container">
-        <div id="result" class="result">노가다의 흔적...</div>
-        <div id="inventory" class="inventory">인벤토리</div>
+  <div class="menu-container">
+    <h1>GM01 Farming System</h1>
+    <div class="menu-buttons">
+      <button class="menu-button" onclick="location.href='search.html'">검색하기</button>
+      <button class="menu-button" onclick="location.href='ranking.html'">랭킹보기</button>
     </div>
-    <script src="script.js" defer></script>
+  </div>
 </body>
 </html>
