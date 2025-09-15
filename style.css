@@ -23,10 +23,10 @@
     margin-bottom: 20px;
   }
   
-/* 검색 폼 */
-form#form {
+  /* 검색 폼 */
+  form#form {
     display: flex;
-    flex-direction: column;   /* 세로 정렬 */
+    flex-direction: column;
     align-items: center;
     gap: 15px;
     max-width: 420px;
@@ -80,7 +80,6 @@ form#form {
     background: #ffa726;
     transform: scale(1.03);
   }
-  
   
   /* 결과 컨테이너 */
   .result, .inventory {
@@ -176,4 +175,40 @@ form#form {
     color: #ccc;
   }
   .exp-section { margin-bottom: 15px; }
+  
+  /* 메인 메뉴(index.html) */
+  .menu-container {
+    text-align: center;
+    padding: 80px 20px;
+  }
+  .menu-container h1 {
+    margin-bottom: 40px;
+    font-size: 2em;
+    color: #ffd700;
+    text-shadow: 1px 1px 4px #000;
+  }
+  .menu-buttons {
+    display: flex;
+    height: 100vh;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+  }
+  .menu-button {
+    width: 500px;
+    height: 500px;
+    padding: 20px 40px;
+    font-size: 2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    background-color: #ff9800;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+  .menu-button:hover {
+    background-color: #ffa726;
+    transform: scale(1.05);
+  }
   

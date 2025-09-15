@@ -1,13 +1,13 @@
 {
-    "rewrites": [
-      { "source": "/", "destination": "/index.html" },
-      { "source": "/status", "destination": "/status.html" },
-      { "source": "/ranking", "destination": "/ranking.html" }
-    ],
     "builds": [
-        { "src": "*.html", "use": "@vercel/static" },
-        { "src": "style.css", "use": "@vercel/static" },
-        { "src": "*.js", "use": "@vercel/static" }
-      ]
+      { "src": "*.html", "use": "@vercel/static" },
+      { "src": "*.css", "use": "@vercel/static" },
+      { "src": "*.js", "use": "@vercel/static" }
+    ],
+    "routes": [
+      { "src": "/", "dest": "/index.html" },
+      { "src": "/status", "dest": "/status.html" },
+      { "src": "/ranking", "dest": "/ranking.html" }
+    ]
   }
   
