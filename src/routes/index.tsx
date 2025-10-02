@@ -7,12 +7,11 @@ export const ROUTE_CONFIG_MAIN: RouteProps[] = [
   { index: true, element: <Landing /> },
   { path: "status", element: <Status /> },
   { path: "ranking", element: <Ranking /> },
+  { path: "*", element: <Landing /> },
 ];
 
-type PathFromRoute<T> = T extends { path: infer P extends string }
-  ? P
-  : T extends { index: true }
-  ? "/"
-  : never;
-
-export type ROUTE_PATH = PathFromRoute<(typeof ROUTE_CONFIG_MAIN)[number]>;
+export const ROUTE_PATH = {
+  ROOT: "/",
+  STATUS: "/status",
+  RANKING: "/ranking",
+} as const;

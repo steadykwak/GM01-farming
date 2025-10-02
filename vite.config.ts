@@ -70,4 +70,11 @@ export default defineConfig({
       "@": pResolve(__dirname, "./src"),
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use "@/assets/styles/index.scss" as *;`,
+      },
+    },
+  },
 });

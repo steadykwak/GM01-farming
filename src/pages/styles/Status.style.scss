@@ -1,0 +1,168 @@
+/* 검색 폼 */
+form#form {
+  @include flex(column, 15px, center, center);
+  max-width: 420px;
+  margin: 0 auto 40px;
+  padding: 25px 20px;
+  border-radius: $radius-xl;
+  background: $color-panel;
+  box-shadow: $shadow-soft;
+}
+
+/* 입력 컨테이너 */
+.input-container {
+  @include flex(column, 10px, flex-start, flex-start);
+  width: 100%;
+
+  input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1em;
+    border-radius: $radius-md;
+    border: none;
+    text-align: center;
+    background: rgba(#fff, 0.9);
+    color: #333;
+    transition: box-shadow $transition-fast, transform $transition-fast;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 6px $color-gold;
+      transform: scale(1.02);
+    }
+  }
+}
+
+/* 버튼 */
+form#form button {
+  @include button-base;
+  width: 100%;
+  font-size: 1em;
+  font-weight: bold;
+  background: $color-btn;
+  border-radius: $radius-md;
+  transition: transform $transition-fast, background $transition-fast;
+
+  &:hover {
+    background: $color-btn-hover;
+    transform: scale(1.03);
+  }
+}
+
+/* 인벤토리 */
+.inv-grid {
+  @include grid(3, 15px);
+  margin-top: 15px;
+}
+
+.inv-slot {
+  background: rgba($color-text, 0.05);
+  border: 2px solid $color-border-soft;
+  border-radius: $radius-lg;
+  padding: 15px;
+  transition: transform $transition-fast, border $transition-fast;
+
+  &:hover {
+    transform: scale(1.05);
+    border-color: $color-gold;
+  }
+}
+
+.inv-icon {
+  font-size: 2em;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.inv-count {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: $color-gold;
+}
+
+.inv-empty {
+  .inv-icon {
+    opacity: 0.3;
+  }
+  .inv-count {
+    color: $color-text-dim;
+  }
+}
+
+/* 경험치 진행바 */
+.progress-container {
+  width: 100%;
+  background: $color-table-header;
+  border-radius: $radius-lg;
+  margin: 15px 0;
+  overflow: hidden;
+  height: 24px;
+}
+
+.progress-bar {
+  height: 100%;
+  text-align: center;
+  line-height: 24px;
+  color: $color-text;
+  font-weight: bold;
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+}
+
+/* 상태 테이블 */
+.status-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+
+  th,
+  td {
+    padding: 8px;
+    border: 1px solid $color-border;
+    text-align: center;
+  }
+
+  th {
+    background: $color-table-header;
+    color: $color-gold;
+  }
+}
+
+/* 카드형 플레이어 정보 */
+.player-card {
+  @include card(
+    $bg: $color-panel,
+    $radius: $radius-xxl,
+    $shadow: $shadow-strong
+  );
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.player-title {
+  margin-bottom: 15px;
+  color: $color-gold;
+  text-shadow: 1px 1px 4px #000;
+}
+
+.gold-section {
+  margin-bottom: 10px;
+
+  .sub {
+    font-size: 0.9em;
+    color: $color-text-dim;
+  }
+}
+
+.exp-section {
+  margin-bottom: 15px;
+}
+
+.result,
+.inventory {
+  margin: 30px auto 0;
+  padding: 20px;
+  max-width: 600px;
+  text-align: center;
+
+  @include card($bg: $color-card, $radius: $radius-xl, $shadow: $shadow-soft);
+}
