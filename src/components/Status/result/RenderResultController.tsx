@@ -1,11 +1,16 @@
+import type { StudentInfo } from "@/apis/types";
 import { LoadingIndicator } from "../LoadingIndicator";
 import { NoStudent } from "../NoStudent";
 import { Result } from "./Result";
+export type ResultProps = Omit<
+  StudentInfo,
+  "itemMeal" | "itemMentor" | "itemBook"
+>;
 
 interface RenderResultControllerProps {
   isLoading: boolean;
   error: string;
-  result: any;
+  result: ResultProps | null;
 }
 
 export const RenderResultController = ({

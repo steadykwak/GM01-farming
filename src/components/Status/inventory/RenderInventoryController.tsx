@@ -1,10 +1,14 @@
+import { CButton } from "@/components/_common";
 import { LoadingIndicator } from "../LoadingIndicator";
 import { NoStudent } from "../NoStudent";
+import { ROUTE_PATH } from "@/routes";
+import type { StudentInfo } from "@/apis/types";
 
+type InventoryProps = Pick<StudentInfo, "itemMeal" | "itemMentor" | "itemBook">;
 interface RendorInventoryControllerProps {
   isLoading: boolean;
   error: string;
-  result: { itemMeal: number; itemMentor: number; itemBook: number } | null;
+  result: InventoryProps | null;
 }
 
 export const RenderInventoryController = ({
@@ -39,6 +43,9 @@ export const RenderInventoryController = ({
           </div>
         ))}
       </div>
+      <CButton mode="link" to={ROUTE_PATH.STORE} className="back-home">
+        상점 가기
+      </CButton>
     </>
   );
 };

@@ -1,12 +1,4 @@
-interface ResultProps {
-  name: string;
-  goldGet: number;
-  goldUse: number;
-  goldLeft: number;
-  exp: number;
-  lv: number;
-  remainExp: number;
-}
+import type { ResultProps } from "./RenderResultController";
 
 const makeProgress = (lv: number, exp: number) => {
   const levelTable = [
