@@ -28,3 +28,18 @@
     }
   }
 }
+
+.store-entrance {
+  @include flex(column, 1rem, center, stretch);
+
+  .close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 14px;
+    height: 14px;
+    border-radius: 30px;
+    padding: 1rem;
+    border-color: $color-border;
+  }
+}

@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet";
 import "./styles/Ranking.style.scss";
 import { CButton } from "@/components/_common";
 import { ROUTE_PATH } from "@/routes";
+import { useFetch } from "@/hooks/useFetch";
 
 interface RankEntry {
   name: string;
@@ -13,8 +14,7 @@ interface RankEntry {
 
 const Ranking = () => {
   const [rank, setRank] = useState<RankEntry[]>([]);
-  const [error, setError] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { isLoading, error, fetchData } = useFetch({ action: "getranking" });
   let lastExp = 0,
     lastLv = 0,
     lastRank = 0,
@@ -22,25 +22,11 @@ const Ranking = () => {
 
   useEffect(() => {
     const fetchRankingData = async () => {
-      const API_BASE =
-        "https://script.google.com/macros/s/AKfycbw0EmgiHEGglmTZbilB9-ZnydVHxOIkB9-xYcFiw8f1Qd56Xi3T7D17td08Ll9tbNY/exec";
-
       try {
-        setIsLoading(true);
-        const response = await fetch(`${API_BASE}?action=getranking`);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        console.log(data);
+        const data = await fetchData();
         setRank(data);
       } catch (error) {
-        if (error instanceof Error) {
-          setError(error.message);
-        }
-        console.error("Fetch error:", error);
-      } finally {
-        setIsLoading(false);
+        console.log(error);
       }
     };
 

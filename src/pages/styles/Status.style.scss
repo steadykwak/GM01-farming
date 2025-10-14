@@ -1,51 +1,12 @@
-/* 검색 폼 */
-form#form {
-  @include flex(column, 15px, center, center);
-  max-width: 420px;
-  margin: 0 auto 40px;
-  padding: 25px 20px;
-  border-radius: $radius-xl;
-  background: $color-panel;
-  box-shadow: $shadow-soft;
-}
-
-/* 입력 컨테이너 */
-.input-container {
-  @include flex(column, 10px, flex-start, flex-start);
-  width: 100%;
-
-  input {
+.form-container {
+  @include flex(column, 20px, center, stretch);
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  color: $color-text;
+  #form {
+    margin: 0 auto;
     width: 100%;
-    padding: 12px;
-    font-size: 1em;
-    border-radius: $radius-md;
-    border: none;
-    text-align: center;
-    background: rgba(#fff, 0.9);
-    color: #333;
-    transition: box-shadow $transition-fast, transform $transition-fast;
-
-    &:focus {
-      outline: none;
-      box-shadow: 0 0 6px $color-gold;
-      transform: scale(1.02);
-    }
-  }
-}
-
-/* 버튼 */
-form#form button {
-  @include button-base;
-  width: 100%;
-  font-size: 1em;
-  font-weight: bold;
-  background: $color-btn;
-  border-radius: $radius-md;
-  transition: transform $transition-fast, background $transition-fast;
-
-  &:hover {
-    background: $color-btn-hover;
-    transform: scale(1.03);
   }
 }
 
@@ -62,10 +23,10 @@ form#form button {
   padding: 15px;
   transition: transform $transition-fast, border $transition-fast;
 
-  &:hover {
-    transform: scale(1.05);
-    border-color: $color-gold;
-  }
+  // &:hover {
+  //   transform: scale(1.05);
+  //   border-color: $color-gold;
+  // }
 }
 
 .inv-icon {
