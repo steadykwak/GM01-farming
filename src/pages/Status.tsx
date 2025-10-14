@@ -9,21 +9,36 @@ import { useUserInfo } from "@/contexts/UserInfoContext";
 import { useFetch } from "@/hooks/useFetch";
 
 const Status = () => {
-  const { handleUserInfo } = useUserInfo();
-  const {
-    data: result,
-    error,
-    isLoading,
-    fetchData,
-  } = useFetch<StudentInfo>({
+  const { userInfo, handleUserInfo } = useUserInfo();
+  const [result, setResult] = useState<StudentInfo | null>(null);
+  const { error, isLoading, fetchData } = useFetch<StudentInfo>({
     action: "getstudentinfo",
   });
 
+  const getUserStatus = useCallback(async () => {
+    try {
+      if (userInfo.name && userInfo.phone) {
+        const data = await fetchData(
+          `name=${userInfo.name}&phone=${userInfo.phone}`
+        );
+        setResult(data);
+        handleUserInfo({ goldLeft: data?.goldLeft || 0 });
+      }
+    } catch (error) {
+      console.error("Error fetching user status:", error);
+    }
+  }, [userInfo.name, userInfo.phone]);
+
   const submitCallback = async (value?: InputValueType) => {
     if (!value) return;
-    await fetchData(`name=${value.name}&phone=${value.phone}`);
-    handleUserInfo({ goldLeft: result?.goldLeft || 0 });
+    await getUserStatus();
   };
+
+  useEffect(() => {
+    if (userInfo.name && userInfo.phone) {
+      getUserStatus();
+    }
+  }, [getUserStatus]);
   return (
     <>
       <Helmet>
@@ -32,7 +47,7 @@ const Status = () => {
       </Helmet>
       <div className="form-container">
         <h2>⛏️ 파밍을 얼마나 열심히 했는지 볼 수 있는 곳 👩🏻‍🌾</h2>
-        <CustomForm submitCallback={submitCallback} />
+        {!userInfo.name && <CustomForm submitCallback={submitCallback} />}
       </div>
 
       <div className="result-container">

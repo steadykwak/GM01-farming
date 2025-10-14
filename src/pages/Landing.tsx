@@ -8,15 +8,36 @@ import { useUserInfo } from "@/contexts/UserInfoContext";
 
 const Landing = () => {
   const modal = useModal();
-
+  const { userInfo } = useUserInfo();
+  const navigate = useNavigate();
+  const { fetchData } = useFetch({ action: "getstudentinfo" });
   const entranceStore = () => {
-    modal.open({
-      id: "store-entrance",
-      title: "상점 입장",
-      content: <StoreEntrance />,
-      mode: "no-btn",
-    });
+    if (!userInfo.name || !userInfo.phone) {
+      modal.open({
+        id: "store-entrance",
+        title: "상점 입장",
+        content: <StoreEntrance />,
+        mode: "no-btn",
+      });
+    } else {
+      navigate(ROUTE_PATH.STORE);
+    }
   };
+
+  useEffect(() => {
+    if (userInfo.name && userInfo.phone) {
+      const fetchUserInfo = async () => {
+        const data = await fetchData(
+          `name=${userInfo.name}&phone=${userInfo.phone}`
+        );
+        if (data) {
+          // Update only goldLeft to avoid overwriting name and phone
+          userInfo.goldLeft = data.goldLeft;
+        }
+        fetchUserInfo();
+      };
+    }
+  }, []);
 
   return (
     <main className="container">
