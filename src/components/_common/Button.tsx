@@ -1,5 +1,6 @@
-import type { ROUTE_PATH } from "@/routes/types";
+import "./styles/Button.style.scss";
 import clsx from "clsx";
+import type { ROUTE_PATH } from "@/routes/types";
 import type { ButtonHTMLAttributes } from "react";
 import { Link } from "react-router-dom";
 
@@ -18,12 +19,16 @@ export const CButton = ({
   switch (mode) {
     case "primary":
       return (
-        <button className={clsx("primary", className)} {...attributes}>
+        <button className={clsx("c-btn", className)} {...attributes}>
           {children}
         </button>
       );
     case "outline":
-      return;
+      return (
+        <button className={clsx("c-btn", "outline", className)} {...attributes}>
+          {children}
+        </button>
+      );
     case "link":
       if (!to)
         throw new Error("ButtonError: to prop is required for link mode");

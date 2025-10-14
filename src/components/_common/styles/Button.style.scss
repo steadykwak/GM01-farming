@@ -1,0 +1,47 @@
+.c-btn {
+  @include button-base;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: $radius-md;
+  color: #fff;
+  background: linear-gradient(135deg, $color-btn, #ff5722);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform $transition-fast, background $transition-fast,
+    box-shadow $transition-fast;
+
+  &:hover {
+    background: linear-gradient(135deg, $color-btn-hover, #ff7043);
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+  }
+
+  &:active {
+    transform: scale(0.97);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  &.outline {
+    background: transparent;
+    border: 2px solid $color-btn;
+    color: $color-btn;
+    box-shadow: none;
+
+    &:hover {
+      border-color: $color-btn-hover;
+      color: $color-btn-hover;
+      transform: scale(1.05);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+}
