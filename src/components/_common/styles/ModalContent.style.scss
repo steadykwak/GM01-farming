@@ -1,0 +1,42 @@
+.modal-wrapper {
+  @include flex(row, 0, center, center);
+  background-color: rgba(black, 0.5);
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+
+  animation: fadeIn 0.25s ease forwards;
+
+  .modal {
+    @include flex(column, 1rem, center, stretch);
+    @include card(
+      $bg: $color-panel,
+      $radius: $radius-xl,
+      $shadow: $shadow-strong
+    );
+    width: min(90%, 400px);
+    padding: 24px;
+    text-align: center;
+    color: $color-text;
+    animation: scaleIn 0.25s ease forwards;
+    position: relative;
+
+    h2 {
+      color: $color-gold;
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      text-shadow: 1px 1px 3px #000;
+    }
+  }
+
+  .btn-container {
+    @include flex(row, 0.5rem, center, center);
+  }
+}
