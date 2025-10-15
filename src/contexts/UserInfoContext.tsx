@@ -10,15 +10,17 @@ export type UserInfoType = {
 export interface UserInfoContextType {
   userInfo: UserInfoType;
   handleUserInfo: (info: Partial<UserInfoType>) => void;
+  removeUserInfo: () => void;
 }
 
 const UserInfoContext = createContext<UserInfoContextType>({
   userInfo: { name: "", phone: "", goldLeft: 0 },
   handleUserInfo: () => {},
+  removeUserInfo: () => {},
 });
 
 export const UserInfoProvider = ({ children }: PropsWithChildren) => {
-  const { cookies, setCookie } = useCookieHandler("uu");
+  const { cookies, setCookie, removeCookie } = useCookieHandler("uu");
   const [userInfo, setUserInfo] = useState<UserInfoType>({
     name: "",
     phone: "",
@@ -27,6 +29,11 @@ export const UserInfoProvider = ({ children }: PropsWithChildren) => {
   const handleUserInfo = (info: Partial<UserInfoType>) => {
     setUserInfo((prev) => ({ ...prev, ...info }));
     setCookie(JSON.stringify({ ...userInfo, ...info }));
+  };
+
+  const removeUserInfo = () => {
+    setUserInfo({ name: "", phone: "", goldLeft: 0 });
+    removeCookie();
   };
 
   useEffect(() => {
@@ -40,7 +47,9 @@ export const UserInfoProvider = ({ children }: PropsWithChildren) => {
   }, []);
 
   return (
-    <UserInfoContext.Provider value={{ userInfo, handleUserInfo }}>
+    <UserInfoContext.Provider
+      value={{ userInfo, handleUserInfo, removeUserInfo }}
+    >
       {children}
     </UserInfoContext.Provider>
   );

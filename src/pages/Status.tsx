@@ -9,7 +9,7 @@ import { useUserInfo } from "@/contexts/UserInfoContext";
 import { useFetch } from "@/hooks/useFetch";
 
 const Status = () => {
-  const { userInfo, handleUserInfo } = useUserInfo();
+  const { userInfo, handleUserInfo, removeUserInfo } = useUserInfo();
   const [result, setResult] = useState<StudentInfo | null>(null);
   const { error, isLoading, fetchData } = useFetch<StudentInfo>({
     action: "getstudentinfo",
@@ -39,6 +39,7 @@ const Status = () => {
       getUserStatus();
     }
   }, [getUserStatus]);
+
   return (
     <>
       <Helmet>
@@ -47,7 +48,14 @@ const Status = () => {
       </Helmet>
       <div className="form-container">
         <h2>⛏️ 파밍을 얼마나 열심히 했는지 볼 수 있는 곳 👩🏻‍🌾</h2>
-        {!userInfo.name && <CustomForm submitCallback={submitCallback} />}
+
+        {userInfo.name ? (
+          <CButton mode="primary" onClick={removeUserInfo}>
+            정보 재입력
+          </CButton>
+        ) : (
+          <CustomForm submitCallback={submitCallback} />
+        )}
       </div>
 
       <div className="result-container">
