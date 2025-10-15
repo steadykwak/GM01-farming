@@ -1,0 +1,181 @@
+import "./styles/Store.style.scss";
+import type { MouseEvent } from "react";
+import { Helmet } from "react-helmet";
+import { SALES } from "@/assets/configs";
+import { CButton } from "@/components/_common";
+import { ROUTE_PATH } from "@/routes";
+import { useUserInfo } from "@/contexts/UserInfoContext";
+import { useFetch } from "@/hooks/useFetch";
+import { useModal } from "@/contexts/ModalContext";
+import { LoadingIndicator } from "@/components/Status/LoadingIndicator";
+
+type Cart = { date: number; mentor: number; book: number };
+
+const Store = () => {
+  const {
+    userInfo: { name, phone, goldLeft: gold },
+  } = useUserInfo();
+  const [totalG, setTotalG] = useState<number>(0);
+  const [cart, setCart] = useState<Cart>({ date: 0, mentor: 0, book: 0 });
+  const navigate = useNavigate();
+  const modal = useModal();
+  const { fetchData, isLoading } = useFetch({
+    action: "purchase",
+  });
+
+  useEffect(() => {
+    if (!name || !phone) {
+      alert("잘못된 접근입니다.");
+      navigate(ROUTE_PATH.ROOT);
+    }
+  }, [navigate]);
+
+  const handleCartSelect = (e: MouseEvent) => {
+    const target = e.target as HTMLDivElement;
+    const id = target.id as keyof Cart;
+    const name = target.dataset;
+    if (name.minus) {
+      if (cart[id] === 0) return;
+      const item = SALES.find((item) => item.id === id);
+      if (item) {
+        setTotalG((prev) => prev - item.price);
+      }
+      setCart((prev) => ({ ...prev, [id]: prev[id] - 1 }));
+    } else {
+      const item = SALES.find((item) => item.id === id);
+      if (totalG + (item?.price || 0) > (gold || 0)) {
+        alert("현재 골드 이상 담을 수 없습니다.");
+        return;
+      }
+      if (item) {
+        setTotalG((prev) => prev + item.price);
+      }
+      setCart((prev) => ({ ...prev, [id]: prev[id] + 1 }));
+    }
+  };
+
+  const onSubmit = async () => {
+    if (totalG === 0) {
+      alert("장바구니가 비어있습니다.");
+      return;
+    }
+
+    modal.open({
+      id: "purchase",
+      title: "✅ 구매 확인",
+      mode: "confirm",
+      content: <PurchaseModal isLoading={isLoading} />,
+      onConfirm: async () => {
+        const result = await fetchData("", {
+          method: "POST",
+          body: JSON.stringify({ name, phone, sales: cart }),
+        });
+        if (result) {
+          alert("구매가 완료되었습니다.");
+          navigate(ROUTE_PATH.STATUS);
+        } else {
+          alert("구매에 실패했습니다. 잠시 후 다시 시도해주세요.");
+        }
+        modal.close("purchase");
+      },
+      onCancel: () => modal.close("purchase"),
+    });
+  };
+
+  return (
+    <>
+      <Helmet>
+        <meta name="description" content="This is the status page." />
+        <title>파밍 상점</title>
+      </Helmet>
+      <div className="store">
+        <div className="store-header">
+          <h2>🏪 파밍 상점</h2>
+
+          <div className="wallet">
+            <span className="gold">{name}</span>
+            <span className="label">님의 보유 골드</span>
+            <span className="gold">{gold?.toLocaleString()} G</span>
+          </div>
+        </div>
+
+        <div className="store-grid" onClick={handleCartSelect}>
+          {SALES.map((item, index) => (
+            <div className="slot" key={index} id={item.id}>
+              <div className="title" id={item.id}>
+                <span className="icon" id={item.id}>
+                  {item.icon}
+                </span>
+                <span className="name" id={item.id}>
+                  {item.name}
+                </span>
+              </div>
+              <span className="desc" id={item.id}>
+                {item.desc}
+              </span>
+              <span className="count" id={item.id}>
+                {item.price.toLocaleString()} G
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <div className="checkout card">
+          <h2>🛒 장바구니</h2>
+          <div className="cart">
+            {SALES.map((item) => {
+              const ea = cart[item.id as keyof Cart];
+              return (
+                <div className="wrapper" key={item.id}>
+                  <div className="title">
+                    <span className="icon">{item.icon}</span>
+                    <span className="name">{item.name}</span>
+                  </div>
+                  <div className="info">
+                    <div className="controller" onClick={handleCartSelect}>
+                      <CButton mode="default" id={item.id} data-minus>
+                        -
+                      </CButton>
+                      <span className="ea">{ea}</span>
+                      <CButton mode="default" id={item.id} data-plus>
+                        +
+                      </CButton>
+                    </div>
+                    <span className="price">
+                      {(item.price * ea).toLocaleString()} G
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="summary">
+            <span>총 금액</span>
+            <strong className="price">{totalG.toLocaleString()} G</strong>
+          </div>
+
+          <CButton mode="primary" disabled={totalG === 0} onClick={onSubmit}>
+            구매하기
+          </CButton>
+        </div>
+        <CButton mode="link" to={ROUTE_PATH.ROOT} className="back-home">
+          🏠 메인으로 돌아가기
+        </CButton>
+      </div>
+    </>
+  );
+};
+
+export default Store;
+
+interface PurchaseModalProps {
+  isLoading: boolean;
+}
+
+const PurchaseModal = ({ isLoading }: PurchaseModalProps) => {
+  if (isLoading) {
+    return <LoadingIndicator />;
+  }
+
+  return <div>구매하시겠습니까?</div>;
+};

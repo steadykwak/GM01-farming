@@ -1,0 +1,41 @@
+@forward "./reset.scss";
+@forward "./variables.scss";
+@forward "./mixins.scss";
+
+@use "./variables.scss" as *;
+@use "./mixins.scss" as *;
+
+body {
+  font-family: $font-family;
+  background: linear-gradient(135deg, $color-bg-grad-a, $color-bg-grad-b);
+  background-size: cover;
+  background-attachment: fixed;
+  color: $color-text;
+  text-align: center;
+  padding: 40px;
+}
+
+h2 {
+  color: $color-gold;
+  text-shadow: 1px 1px 3px #000;
+  margin-bottom: 20px;
+}
+
+.back-home {
+  @include button-base;
+  display: inline-block;
+  margin: 30px auto 0;
+  padding: 12px 24px;
+  font-size: 1em;
+  font-weight: bold;
+  background: linear-gradient(135deg, $color-btn, #ff5722);
+  border-radius: $radius-md;
+  text-decoration: none;
+  box-shadow: $shadow-strong;
+  transition: transform $transition-fast, background 0.3s;
+
+  &:hover {
+    background: linear-gradient(135deg, $color-btn-hover, #ff7043);
+    transform: scale(1.05);
+  }
+}

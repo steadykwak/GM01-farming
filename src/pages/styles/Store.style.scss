@@ -1,0 +1,155 @@
+.store {
+  @include container(1000px, 20px);
+  display: grid;
+  gap: 20px;
+
+  .store-header {
+    @include card(
+      $bg: $color-panel,
+      $radius: $radius-xl,
+      $shadow: $shadow-soft
+    );
+    padding: 20px;
+
+    h2 {
+      margin-bottom: 16px;
+      color: $color-gold;
+      text-shadow: 1px 1px 3px #000;
+    }
+
+    .wallet {
+      @include flex(row, 10px, center, center);
+      justify-content: center;
+      margin-bottom: 12px;
+
+      .label {
+        color: $color-text-dim;
+      }
+      .gold {
+        font-weight: 700;
+        color: $color-gold;
+        margin-left: 6px;
+      }
+    }
+  }
+
+  .store-grid {
+    @include grid(1, 15px);
+    margin-top: 15px;
+
+    .slot {
+      @include flex(column, 1rem, space-around, center);
+
+      background: rgba($color-text, 0.05);
+      border: 2px solid $color-border-soft;
+      border-radius: $radius-lg;
+      padding: 15px;
+      transition: transform $transition-fast, border $transition-fast;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.05);
+        border-color: $color-gold;
+        background-color: rgba($color-gold, 0.3);
+      }
+
+      .title {
+        @include flex(row, 10px, center, end);
+
+        .icon {
+          font-size: 2em;
+        }
+
+        .name {
+          font-size: 1.5em;
+          font-weight: bold;
+          margin-bottom: 8px;
+        }
+      }
+
+      .desc {
+        font-size: 1rem;
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .count {
+        font-weight: bold;
+        font-size: 1.1em;
+        color: $color-gold;
+      }
+    }
+  }
+
+  .checkout.card {
+    @include card(
+      $bg: $color-panel,
+      $radius: $radius-xl,
+      $shadow: $shadow-strong
+    );
+    padding: 16px;
+    display: grid;
+    gap: 12px;
+
+    .cart {
+      .wrapper {
+        @include flex(row, 1rem, space-between, center);
+        margin: 0 2rem;
+        .title {
+          @include flex(row, 0.5rem, center, center);
+          font-weight: 600;
+          font-size: 1rem;
+        }
+        .info {
+          @include flex(row, 1rem, space-between, center);
+          width: 12.5rem;
+
+          .controller {
+            @include flex(row, 0.5rem, center, center);
+
+            button {
+              @include flex(row, 0.5rem, center, center);
+              width: 1.5rem;
+              height: 1.5rem;
+              background: transparent;
+              border: 1px solid $color-border;
+              border-radius: $radius-sm;
+              color: $color-text;
+              font-size: 1.2rem;
+              cursor: pointer;
+              transition: background $transition-fast,
+                transform $transition-fast;
+
+              &:hover {
+                background: rgba(255, 255, 255, 0.08);
+                transform: scale(1.1);
+              }
+            }
+          }
+        }
+      }
+    }
+    .summary {
+      @include flex(row, 1rem, center, center);
+    }
+    .price {
+      font-weight: 700;
+      color: $color-gold;
+      font-size: 1.2rem;
+    }
+    .back-home {
+      display: inline-block;
+      padding: 12px 18px;
+      background: transparent;
+      border: 1px solid $color-border;
+      border-radius: $radius-md;
+      color: $color-text;
+      text-decoration: none;
+      transition: transform $transition-fast, background $transition-fast;
+      &:hover {
+        background: rgba(255, 255, 255, 0.08);
+        transform: scale(1.03);
+      }
+    }
+  }
+}

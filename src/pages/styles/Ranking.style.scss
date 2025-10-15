@@ -1,0 +1,32 @@
+.ranking-table {
+  margin: 30px auto;
+  border-collapse: collapse;
+  width: 90%;
+  max-width: 800px;
+  @include card($bg: $color-card, $radius: $radius-xl, $shadow: $shadow-soft);
+  overflow: hidden;
+
+  th,
+  td {
+    padding: 12px;
+    border: 1px solid $color-border;
+    text-align: center;
+  }
+
+  th {
+    background: $color-table-header;
+    color: $color-gold;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #000;
+  }
+
+  tr:nth-child(even) {
+    background: rgba($color-text, 0.05);
+  }
+
+  tr:hover {
+    background: rgba($color-text, 0.1);
+    transform: scale(1.01);
+    transition: all $transition-fast ease;
+  }
+}
