@@ -37,8 +37,6 @@ export const CustomForm = ({ submitCallback }: CustomFormProps) => {
 
     if (!validate()) return;
 
-    handleUserInfo({ name: value.name, phone: value.phone });
-
     if (!submitCallback) return;
     submitCallback({ name: value.name, phone: value.phone });
   };

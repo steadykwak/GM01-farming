@@ -22,7 +22,11 @@ const Status = () => {
           `name=${userInfo.name}&phone=${userInfo.phone}`
         );
         setResult(data);
-        handleUserInfo({ goldLeft: data?.goldLeft || 0 });
+        handleUserInfo({
+          name: userInfo.name,
+          phone: userInfo.phone,
+          goldLeft: data?.goldLeft || 0,
+        });
       }
     } catch (error) {
       console.error("Error fetching user status:", error);

@@ -62,10 +62,14 @@ const StoreEntrance = () => {
   });
   const navigate = useNavigate();
   const submitCallback = async (value?: InputValueType) => {
+    if (!value) return;
+    if (value?.name === "" && value?.phone === "") return;
     const data = await fetchData(`name=${value?.name}&phone=${value?.phone}`);
     if (!data) return;
 
     handleUserInfo({
+      name: value?.name,
+      phone: value?.phone,
       goldLeft: data?.goldLeft,
     });
 

@@ -8,12 +8,15 @@ import { useUserInfo } from "@/contexts/UserInfoContext";
 import { useFetch } from "@/hooks/useFetch";
 import { useModal } from "@/contexts/ModalContext";
 import { LoadingIndicator } from "@/components/Status/LoadingIndicator";
+import { useCookieHandler } from "@/hooks/useCookieHandler";
 
 type Cart = { date: number; mentor: number; book: number };
 
 const Store = () => {
+  const { cookies } = useCookieHandler("uu");
   const {
     userInfo: { name, phone, goldLeft: gold },
+    handleUserInfo,
   } = useUserInfo();
   const [totalG, setTotalG] = useState<number>(0);
   const [cart, setCart] = useState<Cart>({ date: 0, mentor: 0, book: 0 });
@@ -24,7 +27,13 @@ const Store = () => {
   });
 
   useEffect(() => {
-    if (!name || !phone) {
+    if (cookies.uu.name && cookies.uu.phone) {
+      handleUserInfo({
+        name: cookies.uu.name,
+        phone: cookies.uu.phone,
+        goldLeft: cookies.uu.goldLeft,
+      });
+    } else if (!name || !phone) {
       alert("잘못된 접근입니다.");
       navigate(ROUTE_PATH.ROOT);
     }

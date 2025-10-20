@@ -9,7 +9,7 @@ export type UserInfoType = {
 
 export interface UserInfoContextType {
   userInfo: UserInfoType;
-  handleUserInfo: (info: Partial<UserInfoType>) => void;
+  handleUserInfo: (info: UserInfoType) => void;
   removeUserInfo: () => void;
 }
 
@@ -20,31 +20,22 @@ const UserInfoContext = createContext<UserInfoContextType>({
 });
 
 export const UserInfoProvider = ({ children }: PropsWithChildren) => {
-  const { cookies, setCookie, removeCookie } = useCookieHandler("uu");
+  const { setCookie, removeCookie } = useCookieHandler("uu");
   const [userInfo, setUserInfo] = useState<UserInfoType>({
     name: "",
     phone: "",
     goldLeft: 0,
   });
-  const handleUserInfo = (info: Partial<UserInfoType>) => {
+  const handleUserInfo = (info: UserInfoType) => {
+    console.log(info);
     setUserInfo((prev) => ({ ...prev, ...info }));
-    setCookie(JSON.stringify({ ...userInfo, ...info }));
+    setCookie(JSON.stringify(info));
   };
 
   const removeUserInfo = () => {
     setUserInfo({ name: "", phone: "", goldLeft: 0 });
     removeCookie();
   };
-
-  useEffect(() => {
-    if (cookies.uu) {
-      try {
-        setUserInfo(cookies.uu);
-      } catch (e) {
-        console.error("Failed to parse user info from cookies:", e);
-      }
-    }
-  }, []);
 
   return (
     <UserInfoContext.Provider
