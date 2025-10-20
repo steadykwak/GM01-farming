@@ -1,7 +1,6 @@
 import "./styles/Form.style.scss";
 import type { ChangeEvent } from "react";
 import { CButton } from "./Button";
-import { useUserInfo } from "@/contexts/UserInfoContext";
 
 export type InputValueType = {
   name: string;
@@ -12,7 +11,6 @@ interface CustomFormProps {
 }
 
 export const CustomForm = ({ submitCallback }: CustomFormProps) => {
-  const { handleUserInfo } = useUserInfo();
   const [value, setValue] = useState<InputValueType>({ name: "", phone: "" });
   const handleValue = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target as HTMLInputElement;
