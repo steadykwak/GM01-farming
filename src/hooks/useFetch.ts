@@ -14,6 +14,7 @@ export const useFetch = <T>({ action }: FetchParameters) => {
   const fetchData = async (query?: string, fetchOptions?: RequestInit) => {
     try {
       setIsLoading(true);
+      setError("");
       const response = await fetch(
         `${BASE_URL}?action=${action}${query ? `&${query}` : ""}`,
         fetchOptions
