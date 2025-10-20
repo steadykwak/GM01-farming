@@ -5,6 +5,7 @@ import { useModal } from "@/contexts/ModalContext";
 import { CButton, CustomForm, type InputValueType } from "@/components/_common";
 import { useFetch } from "@/hooks/useFetch";
 import { useUserInfo } from "@/contexts/UserInfoContext";
+import { LoadingIndicator } from "@/components/Status/LoadingIndicator";
 
 const Landing = () => {
   const modal = useModal();
@@ -31,7 +32,6 @@ const Landing = () => {
           `name=${userInfo.name}&phone=${userInfo.phone}`
         );
         if (data) {
-          // Update only goldLeft to avoid overwriting name and phone
           userInfo.goldLeft = data.goldLeft;
         }
         fetchUserInfo();
@@ -63,6 +63,8 @@ const StoreEntrance = () => {
   const navigate = useNavigate();
   const submitCallback = async (value?: InputValueType) => {
     const data = await fetchData(`name=${value?.name}&phone=${value?.phone}`);
+    if (!data) return;
+
     handleUserInfo({
       goldLeft: data?.goldLeft,
     });
@@ -72,8 +74,7 @@ const StoreEntrance = () => {
   };
   return (
     <div className="store-entrance">
-      {isLoading && <p>로딩중...</p>}
-      {error && <p>에러가 발생했습니다. 다시 시도해주세요.</p>}
+      {error && <p>{error}</p>}
 
       <CButton
         className="menuBtn close-btn"
@@ -84,7 +85,11 @@ const StoreEntrance = () => {
         X
       </CButton>
 
-      <CustomForm submitCallback={submitCallback} />
+      {isLoading ? (
+        <LoadingIndicator />
+      ) : (
+        <CustomForm submitCallback={submitCallback} />
+      )}
     </div>
   );
 };
