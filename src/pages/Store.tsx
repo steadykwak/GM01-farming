@@ -2,13 +2,14 @@ import "./styles/Store.style.scss";
 import type { MouseEvent } from "react";
 import { Helmet } from "react-helmet";
 import { SALES } from "@/assets/configs";
-import { CButton } from "@/components/_common";
+import { CButton, CustomForm, type InputValueType } from "@/components/_common";
 import { ROUTE_PATH } from "@/routes";
 import { useUserInfo } from "@/contexts/UserInfoContext";
 import { useFetch } from "@/hooks/useFetch";
 import { useModal } from "@/contexts/ModalContext";
 import { LoadingIndicator } from "@/components/Status/LoadingIndicator";
 import { useCookieHandler } from "@/hooks/useCookieHandler";
+import type { StudentInfo } from "@/apis/types";
 
 type Cart = { date: number; mentor: number; book: number };
 
@@ -91,6 +92,15 @@ const Store = () => {
     });
   };
 
+  const updateUser = () => {
+    modal.open({
+      id: "store-entrance",
+      title: "정보 수정",
+      content: <StoreEntrance />,
+      mode: "no-btn",
+    });
+  };
+
   return (
     <>
       <Helmet>
@@ -106,6 +116,9 @@ const Store = () => {
             <span className="label">님의 보유 골드</span>
             <span className="gold">{gold?.toLocaleString()} G</span>
           </div>
+          <CButton className="back-home" mode="default" onClick={updateUser}>
+            정보 수정
+          </CButton>
         </div>
 
         <div className="store-grid" onClick={handleCartSelect}>
@@ -187,4 +200,48 @@ const PurchaseModal = ({ isLoading }: PurchaseModalProps) => {
   }
 
   return <div>구매하시겠습니까?</div>;
+};
+
+const StoreEntrance = () => {
+  const modal = useModal();
+  const { handleUserInfo } = useUserInfo();
+  const { isLoading, error, fetchData } = useFetch<StudentInfo>({
+    action: "getstudentinfo",
+  });
+  const navigate = useNavigate();
+  const submitCallback = async (value?: InputValueType) => {
+    if (!value) return;
+    if (value?.name === "" && value?.phone === "") return;
+    const data = await fetchData(`name=${value?.name}&phone=${value?.phone}`);
+    if (!data) return;
+
+    handleUserInfo({
+      name: value?.name,
+      phone: value?.phone,
+      goldLeft: data?.goldLeft,
+    });
+
+    modal.close("store-entrance");
+    navigate(ROUTE_PATH.STORE);
+  };
+  return (
+    <div className="store-entrance">
+      {error && <p>{error}</p>}
+
+      <CButton
+        className="menuBtn close-btn"
+        mode="outline"
+        disabled={isLoading}
+        onClick={() => modal.close("store-entrance")}
+      >
+        X
+      </CButton>
+
+      {isLoading ? (
+        <LoadingIndicator />
+      ) : (
+        <CustomForm submitCallback={submitCallback} />
+      )}
+    </div>
+  );
 };
