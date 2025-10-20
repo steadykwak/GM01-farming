@@ -7,7 +7,6 @@ import { RenderResultController } from "@/components/Status/result";
 import { RenderInventoryController } from "@/components/Status/inventory";
 import { useUserInfo } from "@/contexts/UserInfoContext";
 import { useFetch } from "@/hooks/useFetch";
-import { LoadingIndicator } from "@/components/Status/LoadingIndicator";
 
 const Status = () => {
   const { userInfo, handleUserInfo, removeUserInfo } = useUserInfo();
