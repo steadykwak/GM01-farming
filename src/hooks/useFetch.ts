@@ -29,6 +29,7 @@ export const useFetch = <T>({ action }: FetchParameters) => {
       if (!result) {
         throw new Error("잘못된 정보입니다. 다시 입력해주세요.");
       }
+      setError("");
       setData(result);
       return result;
     } catch (error: unknown) {
