@@ -18,10 +18,16 @@ export const useFetch = <T>({ action }: FetchParameters) => {
         `${BASE_URL}?action=${action}${query ? `&${query}` : ""}`,
         fetchOptions
       );
+
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
+
       const result = await response.json();
+
+      if (!result) {
+        throw new Error("잘못된 정보입니다. 다시 입력해주세요.");
+      }
       setData(result);
       return result;
     } catch (error: unknown) {
