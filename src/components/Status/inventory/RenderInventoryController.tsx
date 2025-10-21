@@ -1,5 +1,5 @@
 import { CButton } from "@/components/_common";
-import { LoadingIndicator } from "../LoadingIndicator";
+import { InvenIndicator } from "../InvenIndicator";
 import { NoStudent } from "../NoStudent";
 import { ROUTE_PATH } from "@/routes";
 import type { StudentInfo } from "@/apis/types";
@@ -13,7 +13,7 @@ interface RendorInventoryControllerProps {
 
 export const RenderInventoryController = ({ result, isLoading, error }: RendorInventoryControllerProps) => {
     if (isLoading) {
-        return <LoadingIndicator />;
+        return <InvenIndicator />;
     }
 
     if (error) {
