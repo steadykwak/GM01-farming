@@ -1,6 +1,5 @@
 import type { StudentInfo } from "@/apis/types";
 import { LoadingIndicator } from "../LoadingIndicator";
-import { InvenIndicator } from "../InvenIndicator";
 import { NoStudent } from "../NoStudent";
 import { Result } from "./Result";
 export type ResultProps = Omit<StudentInfo, "itemMeal" | "itemMentor" | "itemBook">;
