@@ -15,27 +15,44 @@ const Status = () => {
     action: "getstudentinfo",
   });
 
-  const getUserStatus = useCallback(async () => {
-    try {
-      if (userInfo.name && userInfo.phone) {
-        const data = await fetchData(
-          `name=${userInfo.name}&phone=${userInfo.phone}`
-        );
-        setResult(data);
-        handleUserInfo({
-          name: userInfo.name,
-          phone: userInfo.phone,
-          goldLeft: data?.goldLeft || 0,
-        });
+  const getUserStatus = useCallback(
+    async (value?: InputValueType) => {
+      try {
+        if (value?.name && value?.phone) {
+          const data = await fetchData(
+            `name=${value?.name}&phone=${value?.phone}`
+          );
+          if (!data) throw new Error("잘못된 정보입니다. 다시 입력하세요.");
+
+          setResult(data);
+          handleUserInfo({
+            name: value?.name,
+            phone: value?.phone,
+            goldLeft: data?.goldLeft || 0,
+          });
+        } else if (userInfo.name && userInfo.phone) {
+          const data = await fetchData(
+            `name=${userInfo.name}&phone=${userInfo.phone}`
+          );
+          if (!data) throw new Error("잘못된 정보입니다. 다시 입력하세요.");
+
+          setResult(data);
+          handleUserInfo({
+            name: userInfo.name,
+            phone: userInfo.phone,
+            goldLeft: data?.goldLeft || 0,
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching user status:", error);
       }
-    } catch (error) {
-      console.error("Error fetching user status:", error);
-    }
-  }, [userInfo.name, userInfo.phone]);
+    },
+    [userInfo.name, userInfo.phone]
+  );
 
   const submitCallback = async (value?: InputValueType) => {
     if (!value) return;
-    await getUserStatus();
+    await getUserStatus(value);
   };
 
   useEffect(() => {
@@ -52,14 +69,14 @@ const Status = () => {
       </Helmet>
       <div className="form-container">
         <h2>⛏️ 파밍을 얼마나 열심히 했는지 볼 수 있는 곳 👩🏻‍🌾</h2>
-
-        {userInfo.name ? (
-          <CButton mode="primary" onClick={removeUserInfo}>
-            정보 재입력
-          </CButton>
-        ) : (
-          <CustomForm submitCallback={submitCallback} />
-        )}
+        {error && <p>{error}</p>}
+        {userInfo.name
+          ? isLoading || (
+              <CButton mode="primary" onClick={removeUserInfo}>
+                정보 재입력
+              </CButton>
+            )
+          : isLoading || <CustomForm submitCallback={submitCallback} />}
       </div>
 
       <div className="result-container">

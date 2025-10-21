@@ -226,7 +226,7 @@ const StoreEntrance = () => {
   };
   return (
     <div className="store-entrance">
-      {error && <p>{error}</p>}
+      {isLoading || (error && <p>{error}</p>)}
 
       <CButton
         className="menuBtn close-btn"
