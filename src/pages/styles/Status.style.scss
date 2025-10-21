@@ -1,129 +1,127 @@
 .form-container {
-  @include flex(column, 20px, center, stretch);
-  padding: 20px;
-  max-width: 800px;
-  margin: 0 auto;
-  color: $color-text;
-  #form {
+    @include flex(column, 10px, center, stretch);
+    padding: 20px;
+    max-width: 1000px;
     margin: 0 auto;
-    width: 100%;
-  }
+    color: $color-text;
+    #form {
+        margin: 0 auto;
+        width: 100%;
+    }
 }
 
 /* 인벤토리 */
 .inv-grid {
-  @include grid(3, 15px);
-  margin-top: 15px;
+    @include grid(3, 15px);
+    margin-top: 15px;
 }
 
 .inv-slot {
-  background: rgba($color-text, 0.05);
-  border: 2px solid $color-border-soft;
-  border-radius: $radius-lg;
-  padding: 15px;
-  transition: transform $transition-fast, border $transition-fast;
-
-  // &:hover {
-  //   transform: scale(1.05);
-  //   border-color: $color-gold;
-  // }
+    background: rgba($color-text, 0.05);
+    border: 2px solid $color-border-soft;
+    border-radius: $radius-lg;
+    padding: 15px;
+    transition: transform $transition-fast, border $transition-fast;
+    // &:hover {
+    //   transform: scale(1.05);
+    //   border-color: $color-gold;
+    // }
 }
 
 .inv-icon {
-  font-size: 2em;
-  display: block;
-  margin-bottom: 8px;
+    font-size: 2em;
+    display: block;
+    margin-bottom: 8px;
 }
 
 .inv-count {
-  font-weight: bold;
-  font-size: 1.1em;
-  color: $color-gold;
+    font-weight: bold;
+    font-size: 1.1em;
+    color: $color-gold;
+}
+
+.inv-name {
+    font-weight: bold;
+    font-size: 0.8em;
 }
 
 .inv-empty {
-  .inv-icon {
-    opacity: 0.3;
-  }
-  .inv-count {
-    color: $color-text-dim;
-  }
+    opacity: 0.4;
+    .inv-count {
+        color: $color-text-dim;
+    }
 }
 
 /* 경험치 진행바 */
 .progress-container {
-  width: 100%;
-  background: $color-table-header;
-  border-radius: $radius-lg;
-  margin: 15px 0;
-  overflow: hidden;
-  height: 24px;
+    width: 100%;
+    background: $color-table-header;
+    border-radius: $radius-lg;
+    margin: 15px 0;
+    overflow: hidden;
+    height: 24px;
 }
 
 .progress-bar {
-  height: 100%;
-  text-align: center;
-  line-height: 24px;
-  color: $color-text;
-  font-weight: bold;
-  background: linear-gradient(90deg, #00c6ff, #0072ff);
+    height: 100%;
+    text-align: center;
+    line-height: 24px;
+    color: $color-text;
+    font-weight: bold;
+    background: linear-gradient(90deg, #00c6ff, #0072ff);
 }
 
 /* 상태 테이블 */
 .status-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 15px;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
 
-  th,
-  td {
-    padding: 8px;
-    border: 1px solid $color-border;
-    text-align: center;
-  }
+    th,
+    td {
+        padding: 8px;
+        border: 1px solid $color-border;
+        text-align: center;
+    }
 
-  th {
-    background: $color-table-header;
-    color: $color-gold;
-  }
+    th {
+        background: $color-table-header;
+        color: $color-gold;
+    }
 }
 
 /* 카드형 플레이어 정보 */
 .player-card {
-  @include card(
-    $bg: $color-panel,
-    $radius: $radius-xxl,
-    $shadow: $shadow-strong
-  );
-  padding: 20px;
-  margin-bottom: 20px;
+    @include card($bg: $color-panel, $radius: $radius-xxl, $shadow: $shadow-strong);
+    padding: 20px;
+    margin-bottom: 20px;
 }
 
 .player-title {
-  margin-bottom: 15px;
-  color: $color-gold;
-  text-shadow: 1px 1px 4px #000;
+    margin-bottom: 15px;
+    color: $color-gold;
+    text-shadow: 1px 1px 4px #000;
 }
 
 .gold-section {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 
-  .sub {
-    font-size: 0.9em;
-    color: $color-text-dim;
-  }
+    .sub {
+        font-size: 0.9em;
+        color: $color-text-dim;
+    }
 }
 
 .exp-section {
-  margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 .result,
 .inventory {
-  margin: 30px auto 0;
-  padding: 20px;
-  max-width: 600px;
-  text-align: center;
+    margin: 10px auto 0;
+    padding: 20px;
+    max-width: 600px;
+    text-align: center;
 
-  @include card($bg: $color-card, $radius: $radius-xl, $shadow: $shadow-soft);
+    @include card($bg: $color-card, $radius: $radius-xl, $shadow: $shadow-soft);
 }
