@@ -38,9 +38,12 @@ const Ranking = () => {
         <>
             <Helmet>
                 <meta name="description" content="This is the ranking page of My App." />
-                <title>파밍 랭킹</title>
+                <title>Farming Rank</title>
             </Helmet>
-            <h2>🏆 파밍 랭킹</h2>
+            <h1>🏆 랭킹</h1>
+            <CButton mode="link" to={ROUTE_PATH.ROOT} className="back-home">
+                🏠 메인으로 돌아가기
+            </CButton>
             <table className="ranking-table">
                 <thead>
                     <tr>
@@ -92,9 +95,6 @@ const Ranking = () => {
                     )}
                 </tbody>
             </table>
-            <CButton mode="link" to={ROUTE_PATH.ROOT} className="back-home">
-                🏠 메인으로 돌아가기
-            </CButton>
         </>
     );
 };
