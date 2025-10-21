@@ -71,7 +71,6 @@ const Store = () => {
 
         modal.open({
             id: "purchase",
-            title: "✅ 구매 확인",
             mode: "no-btn",
             content: <PurchaseModal cart={cart} />,
         });
@@ -184,6 +183,7 @@ const PurchaseModal = ({ cart }: PurchaseModalProps) => {
     const { fetchData, isLoading } = useFetch({
         action: "purchase",
     });
+
     const onSubmit = async () => {
         const result = await fetchData("", {
             method: "POST",
@@ -201,29 +201,57 @@ const PurchaseModal = ({ cart }: PurchaseModalProps) => {
         }
         modal.close("purchase");
     };
+
+    // cart에서 1개 이상 담긴 항목만 필터링
+    const cartItems = SALES.filter((item) => cart[item.id as keyof Cart] > 0);
+
     return (
-        <div>
+        <div className="purchase-modal">
             {isLoading ? (
                 <ShopIndicator />
             ) : (
-                <div className="btn-container">
-                    <CButton className="menuBtn close-btn" mode="primary" disabled={isLoading} onClick={onSubmit}>
-                        구매
-                    </CButton>
-                    <CButton
-                        className="menuBtn close-btn"
-                        mode="outline"
-                        disabled={isLoading}
-                        onClick={() => modal.close("purchase")}
-                    >
-                        취소
-                    </CButton>
-                </div>
+                <>
+                    <div className="cart-preview">
+                        {cartItems.length === 0 ? (
+                            <p>장바구니가 비어 있습니다.</p>
+                        ) : (
+                            <ul>
+                                {cartItems.map((item) => (
+                                    <li key={item.id} className="cart-item">
+                                        <span className="icon">{item.icon}</span>
+                                        <span className="name">{item.name}</span>
+                                        <span className="ea">x {cart[item.id as keyof Cart]}</span>
+                                        <span className="price">
+                                            {(item.price * cart[item.id as keyof Cart]).toLocaleString()} G
+                                        </span>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                        <div className="total">
+                            <strong>총 금액:</strong>{" "}
+                            <span>
+                                {cartItems
+                                    .reduce((sum, item) => sum + item.price * cart[item.id as keyof Cart], 0)
+                                    .toLocaleString()}{" "}
+                                G
+                            </span>
+                        </div>
+                    </div>
+
+                    <div className="btn-container">
+                        <CButton className="menuBtn close-btn" mode="primary" onClick={onSubmit}>
+                            구매
+                        </CButton>
+                        <CButton className="menuBtn close-btn" mode="outline" onClick={() => modal.close("purchase")}>
+                            취소
+                        </CButton>
+                    </div>
+                </>
             )}
         </div>
     );
 };
-
 const StoreEntrance = () => {
     const modal = useModal();
     const { handleUserInfo } = useUserInfo();

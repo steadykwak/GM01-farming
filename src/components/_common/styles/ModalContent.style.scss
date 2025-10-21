@@ -1,42 +1,123 @@
 .modal-wrapper {
-  @include flex(row, 0, center, center);
-  background-color: rgba(black, 0.5);
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  right: 0;
-  position: fixed;
-  z-index: 1000;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(3px);
+    @include flex(row, 0, center, center);
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    animation: fadeIn 0.25s ease forwards;
 
-  animation: fadeIn 0.25s ease forwards;
+    .modal {
+        @include flex(column, 1rem, center, stretch);
+        @include card($bg: $color-panel, $radius: $radius-xl, $shadow: $shadow-strong);
+        width: min(90%, 400px);
+        padding: 24px;
+        text-align: center;
+        color: $color-text;
+        position: relative;
+        animation: scaleIn 0.25s ease forwards;
 
-  .modal {
-    @include flex(column, 1rem, center, stretch);
-    @include card(
-      $bg: $color-panel,
-      $radius: $radius-xl,
-      $shadow: $shadow-strong
-    );
-    width: min(90%, 400px);
-    padding: 24px;
-    text-align: center;
-    color: $color-text;
-    animation: scaleIn 0.25s ease forwards;
-    position: relative;
+        h2 {
+            color: $color-gold;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            text-shadow: 1px 1px 3px #000;
+        }
 
-    h2 {
-      color: $color-gold;
-      font-size: 1.3rem;
-      margin-bottom: 12px;
-      text-shadow: 1px 1px 3px #000;
+        .cart-preview {
+            margin-bottom: 1rem;
+
+            h3 {
+                margin-bottom: 0.5rem;
+            }
+
+            ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                max-height: clamp(140px, 30vh, 260px);
+                overflow-y: auto;
+            }
+
+            .cart-item {
+                @include flex(row, 0.5rem, center, space-between);
+                padding: 6px 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                align-items: center; // 항목 전체 세로 중앙
+
+                .left {
+                    @include flex(row, 0.4rem, center, flex-start);
+                    align-items: center; // 아이콘+이름 세로 중앙
+
+                    .icon {
+                        width: 24px;
+                        text-align: center;
+                        display: flex; // 이모지 시각 중앙 정렬
+                        align-items: center;
+                        justify-content: center;
+                        line-height: 1; // 줄간격 영향 제거
+                        transform: translateY(1px); // 필요 시 0~2px로 미세 보정
+                    }
+
+                    .name {
+                        text-align: left;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        display: inline-flex; // 텍스트 자체 세로 중앙
+                        align-items: center;
+                        line-height: 1;
+                    }
+                }
+
+                .right {
+                    @include flex(row, 0.5rem, center, flex-end);
+                    align-items: center; // 수량+가격 세로 중앙
+
+                    .ea,
+                    .price {
+                        display: inline-flex; // 텍스트 세로 중앙
+                        align-items: center;
+                        line-height: 1;
+                        font-variant-numeric: tabular-nums;
+                    }
+
+                    .price {
+                        color: #d4af37;
+                        font-weight: 600;
+                    }
+                }
+            }
+
+            .total {
+                margin-top: 0.8rem;
+                font-size: 1.2rem;
+                font-weight: 700;
+            }
+        }
+
+        .btn-container {
+            @include flex(row, 0.5rem, center, center);
+            margin-top: 8px;
+        }
     }
-  }
+}
 
-  .btn-container {
-    @include flex(row, 0.5rem, center, center);
-  }
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes scaleIn {
+    from {
+        transform: scale(0.96);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
