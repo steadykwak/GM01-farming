@@ -10,4 +10,5 @@ export interface StudentInfo {
     itemMentor: number;
     itemBook: number;
     itemZepPoint: number;
+    itemUnityEsset: number;
 }

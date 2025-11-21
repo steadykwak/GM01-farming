@@ -27,4 +27,11 @@ export const SALES = [
         icon: "🪙",
         desc: "ZEP 아이템을 구매할 수 있는 POINT를 1:1로 교환 가능!",
     },
+    {
+        id: "unityEsset",
+        name: "Unity Esset 구매권",
+        price: 5000,
+        icon: "🎁",
+        desc: "구매 정책 수립 중: 아직 구매하지 마세요! (복구 불가)",
+    },
 ];
