@@ -21,14 +21,14 @@ export const SALES = [
         desc: "원하는 도서 1권을 구매할 수 있는 기회!",
     },
     {
-        id: "zepPoint",
+        id: "zep",
         name: "ZEP 포인트 구매권",
         price: 1000,
         icon: "🪙",
         desc: "ZEP 아이템을 구매할 수 있는 POINT를 1:1로 교환 가능!",
     },
     {
-        id: "unityEsset",
+        id: "esset",
         name: "Unity Esset 구매권",
         price: 5000,
         icon: "🎁",

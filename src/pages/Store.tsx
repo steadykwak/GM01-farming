@@ -22,18 +22,18 @@ const getVisibleSales = () => {
 
     // 01 포함 → zepPoint 숨기기
     if (url.includes("01")) {
-        list = list.filter((item) => item.id !== "zepPoint");
+        list = list.filter((item) => item.id !== "zep");
     }
 
     // 02 포함 → unityEsset 숨기기
     if (url.includes("02")) {
-        list = list.filter((item) => item.id !== "unityEsset");
+        list = list.filter((item) => item.id !== "esset");
     }
 
     return list;
 };
 
-type Cart = { date: number; mentor: number; book: number; zepPoint: number; unityEsset: number };
+type Cart = { date: number; mentor: number; book: number; zep: number; esset: number };
 console.log(window.location);
 const Store = () => {
     const { cookies } = useCookieHandler("uu");
@@ -42,7 +42,7 @@ const Store = () => {
         handleUserInfo,
     } = useUserInfo();
     const [totalG, setTotalG] = useState<number>(0);
-    const [cart, setCart] = useState<Cart>({ date: 0, mentor: 0, book: 0, zepPoint: 0, unityEsset: 0 });
+    const [cart, setCart] = useState<Cart>({ date: 0, mentor: 0, book: 0, zep: 0, esset: 0 });
     const navigate = useNavigate();
     const modal = useModal();
 
