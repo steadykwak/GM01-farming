@@ -33,7 +33,7 @@ const getVisibleSales = () => {
     return list;
 };
 
-type Cart = { date: number; mentor: number; book: number; zep: number; Asset: number };
+type Cart = { date: number; mentor: number; book: number; zep: number; asset: number };
 console.log(window.location);
 const Store = () => {
     const { cookies } = useCookieHandler("uu");
@@ -42,7 +42,7 @@ const Store = () => {
         handleUserInfo,
     } = useUserInfo();
     const [totalG, setTotalG] = useState<number>(0);
-    const [cart, setCart] = useState<Cart>({ date: 0, mentor: 0, book: 0, zep: 0, Asset: 0 });
+    const [cart, setCart] = useState<Cart>({ date: 0, mentor: 0, book: 0, zep: 0, asset: 0 });
     const navigate = useNavigate();
     const modal = useModal();
 
