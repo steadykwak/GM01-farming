@@ -13,6 +13,26 @@ import { ShopIndicator } from "@/components/Status/ShopIndicator";
 import { useCookieHandler } from "@/hooks/useCookieHandler";
 import type { StudentInfo } from "@/apis/types";
 
+const getVisibleSales = () => {
+    if (typeof window === "undefined") return SALES;
+
+    const url = window.location.href;
+
+    let list = [...SALES];
+
+    // 01 포함 → zepPoint 숨기기
+    if (url.includes("01")) {
+        list = list.filter((item) => item.id !== "zepPoint");
+    }
+
+    // 02 포함 → unityEsset 숨기기
+    if (url.includes("02")) {
+        list = list.filter((item) => item.id !== "unityEsset");
+    }
+
+    return list;
+};
+
 type Cart = { date: number; mentor: number; book: number; zepPoint: number; unityEsset: number };
 console.log(window.location);
 const Store = () => {
@@ -45,13 +65,13 @@ const Store = () => {
         const name = target.dataset;
         if (name.minus) {
             if (cart[id] === 0) return;
-            const item = SALES.find((item) => item.id === id);
+            const item = visibleSales.find((item) => item.id === id);
             if (item) {
                 setTotalG((prev) => prev - item.price);
             }
             setCart((prev) => ({ ...prev, [id]: prev[id] - 1 }));
         } else {
-            const item = SALES.find((item) => item.id === id);
+            const item = visibleSales.find((item) => item.id === id);
             if (totalG + (item?.price || 0) > (gold || 0)) {
                 alert("현재 골드 이상 담을 수 없습니다.");
                 return;
@@ -84,6 +104,7 @@ const Store = () => {
             mode: "no-btn",
         });
     };
+    const visibleSales = getVisibleSales();
 
     return (
         <>
@@ -109,7 +130,7 @@ const Store = () => {
                 </div>
 
                 <div className="store-grid" onClick={handleCartSelect}>
-                    {SALES.map((item, index) => (
+                    {visibleSales.map((item, index) => (
                         <div className="slot" key={index} id={item.id}>
                             <div className="title" id={item.id}>
                                 <span className="icon" id={item.id}>
@@ -132,7 +153,7 @@ const Store = () => {
                 <div className="checkout card">
                     <h2>🛒 장바구니</h2>
                     <div className="cart">
-                        {SALES.map((item) => {
+                        {visibleSales.map((item) => {
                             const ea = cart[item.id as keyof Cart];
                             return (
                                 <div className="wrapper" key={item.id}>

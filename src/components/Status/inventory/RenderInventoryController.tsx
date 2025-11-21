@@ -15,7 +15,6 @@ export const RenderInventoryController = ({ result, isLoading, error }: RendorIn
     if (isLoading) {
         return <InvenIndicator />;
     }
-
     if (error) {
         return <NoStudent />;
     }
@@ -28,12 +27,24 @@ export const RenderInventoryController = ({ result, isLoading, error }: RendorIn
         { name: "ZEP 포인트 구매권", icon: "🪙", count: result.itemZepPoint },
         { name: "Unity 에셋 구매권", icon: "🎁", count: result.itemUnityEsset },
     ];
+    // URL 기반 필터링만 따로 처리
+    let visibleItems = items;
+
+    if (typeof window !== "undefined") {
+        const url = window.location.href;
+        if (url.includes("01")) {
+            visibleItems = visibleItems.filter((item) => item.icon !== "🪙");
+        }
+        if (url.includes("02")) {
+            visibleItems = visibleItems.filter((item) => item.icon !== "🎁");
+        }
+    }
 
     return (
         <>
             <h2>🎒 인벤토리</h2>
             <div className="inv-grid">
-                {items.map((item, index) => (
+                {visibleItems.map((item, index) => (
                     <div className={`inv-slot ${!item.count && "inv-empty"}`} key={index}>
                         <span className="inv-icon">{item.icon}</span>
                         <p className="inv-name">{item.name}</p>
