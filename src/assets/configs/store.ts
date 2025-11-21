@@ -28,7 +28,7 @@ export const SALES = [
         desc: "ZEP 아이템을 구매할 수 있는 POINT를 1:1로 교환 가능!",
     },
     {
-        id: "Asset",
+        id: "asset",
         name: "Unity Asset 구매권",
         price: 5000,
         icon: "🎁",
