@@ -13,7 +13,7 @@ import { ShopIndicator } from "@/components/Status/ShopIndicator";
 import { useCookieHandler } from "@/hooks/useCookieHandler";
 import type { StudentInfo } from "@/apis/types";
 
-type Cart = { date: number; mentor: number; book: number };
+type Cart = { date: number; mentor: number; book: number; zepPoint: number };
 
 const Store = () => {
     const { cookies } = useCookieHandler("uu");
@@ -22,7 +22,7 @@ const Store = () => {
         handleUserInfo,
     } = useUserInfo();
     const [totalG, setTotalG] = useState<number>(0);
-    const [cart, setCart] = useState<Cart>({ date: 0, mentor: 0, book: 0 });
+    const [cart, setCart] = useState<Cart>({ date: 0, mentor: 0, book: 0, zepPoint: 0 });
     const navigate = useNavigate();
     const modal = useModal();
 

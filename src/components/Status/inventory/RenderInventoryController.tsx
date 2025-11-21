@@ -4,7 +4,7 @@ import { NoStudent } from "../NoStudent";
 import { ROUTE_PATH } from "@/routes";
 import type { StudentInfo } from "@/apis/types";
 
-type InventoryProps = Pick<StudentInfo, "itemMeal" | "itemMentor" | "itemBook">;
+type InventoryProps = Pick<StudentInfo, "itemMeal" | "itemMentor" | "itemBook" | "itemZepPoint">;
 interface RendorInventoryControllerProps {
     isLoading: boolean;
     error: string;
@@ -25,6 +25,7 @@ export const RenderInventoryController = ({ result, isLoading, error }: RendorIn
         { name: "GM 식사권", icon: "🎫", count: result.itemMeal },
         { name: "멘토링 신청권", icon: "🎟️", count: result.itemMentor },
         { name: "도서 구매권", icon: "📚", count: result.itemBook },
+        { name: "ZEP 포인트 구매권", icon: "🪙", count: result.itemZepPoint },
     ];
 
     return (
