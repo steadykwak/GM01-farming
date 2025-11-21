@@ -14,7 +14,7 @@ import { useCookieHandler } from "@/hooks/useCookieHandler";
 import type { StudentInfo } from "@/apis/types";
 
 type Cart = { date: number; mentor: number; book: number; zepPoint: number };
-
+console.log(window.location);
 const Store = () => {
     const { cookies } = useCookieHandler("uu");
     const {
