@@ -11,6 +11,7 @@ interface RankEntry {
     exp: number;
     goldLeft: number;
     remainExp: number;
+    tier: string;
 }
 
 const Ranking = () => {
@@ -22,6 +23,7 @@ const Ranking = () => {
             try {
                 const data = await fetchData();
                 setRank(data);
+                console.log(data);
             } catch (error) {
                 console.log(error);
             }
@@ -47,6 +49,7 @@ const Ranking = () => {
                         <th>레벨</th>
                         <th>경험치</th>
                         <th>다음 레벨까지</th>
+                        <th>티어</th>
                     </tr>
                 </thead>
                 <tbody id="ranking-body">
@@ -133,6 +136,7 @@ function RankList({ rank }: RankListProps) {
                         <td>Lv {entry.lv}</td>
                         <td>⭐ {entry.exp.toLocaleString()}</td>
                         <td>{entry.remainExp.toLocaleString()}</td>
+                        <td>{entry.tier}</td>
                     </tr>
                 );
             })}
