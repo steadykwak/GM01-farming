@@ -26,7 +26,7 @@ const getVisibleSales = () => {
     }
 
     // 02 포함 → unityAsset 숨기기
-    if (url.includes("02")) {
+    if (url.includes("02") || url.includes("03")) {
         list = list.filter((item) => item.id !== "asset");
     }
 

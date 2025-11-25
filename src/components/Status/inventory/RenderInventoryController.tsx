@@ -35,7 +35,7 @@ export const RenderInventoryController = ({ result, isLoading, error }: RendorIn
         if (url.includes("01")) {
             visibleItems = visibleItems.filter((item) => item.icon !== "🪙");
         }
-        if (url.includes("02")) {
+        if (url.includes("02") || url.includes("03")) {
             visibleItems = visibleItems.filter((item) => item.icon !== "🎁");
         }
     }
