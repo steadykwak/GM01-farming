@@ -55,17 +55,17 @@ const Ranking = () => {
                 <tbody id="ranking-body">
                     {isLoading ? (
                         <tr>
-                            <td colSpan={4}>⏳ 랭킹 데이터를 불러오는 중...</td>
+                            <td colSpan={5}>⏳ 랭킹 데이터를 불러오는 중...</td>
                         </tr>
                     ) : error ? (
                         <tr>
-                            <td colSpan={4}>❗ 오류가 발생했습니다: {error}</td>
+                            <td colSpan={5}>❗ 오류가 발생했습니다: {error}</td>
                         </tr>
                     ) : rank && rank.length > 0 ? (
                         <RankList rank={rank} />
                     ) : (
                         <tr>
-                            <td colSpan={4}>랭킹 데이터가 없습니다.</td>
+                            <td colSpan={5}>랭킹 데이터가 없습니다.</td>
                         </tr>
                     )}
                 </tbody>
