@@ -22,15 +22,10 @@ const getVisibleSales = () => {
         return item;
     });
 
-    // 1기: zepPoint 숨기기
-    if (batchId === "01") {
-        list = list.filter((item) => item.id !== "zep");
-    }
-
     // 4, 5기: unityAsset 숨기기
-    if (["04", "05"].includes(batchId)) {
-        list = list.filter((item) => item.id !== "asset");
-    }
+    // if (["04", "05"].includes(batchId)) {
+    //     list = list.filter((item) => item.id !== "asset");
+    // }
 
     return list;
 };

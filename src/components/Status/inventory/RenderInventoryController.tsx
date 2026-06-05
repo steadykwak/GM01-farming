@@ -38,16 +38,6 @@ export const RenderInventoryController = ({ result, isLoading, error }: RendorIn
     const batchId = getBatchId();
     let visibleItems = items;
 
-    // 1기: ZEP 포인트 숨기기
-    if (batchId === "01") {
-        visibleItems = visibleItems.filter((item) => item.id !== "zep");
-    }
-
-    // 2, 3기: Unity 에셋 숨기기
-    if (batchId === "04" || batchId === "05") {
-        visibleItems = visibleItems.filter((item) => item.id !== "asset");
-    }
-
     return (
         <>
             <h2 className="inventory-title">🎒 인벤토리</h2>
