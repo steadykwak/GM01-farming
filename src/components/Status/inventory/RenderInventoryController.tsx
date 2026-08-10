@@ -30,7 +30,7 @@ export const RenderInventoryController = ({ result, isLoading, error }: RendorIn
         { id: "meal", name: "GM 식사권", icon: "🎫", count: result.itemMeal },
         { id: "mentor", name: "멘토링 신청권", icon: "🎟️", count: result.itemMentor },
         { id: "book", name: "도서 구매권", icon: "📚", count: result.itemBook },
-        { id: "zep", name: "ZEP 포인트 구매권", icon: "🪙", count: result.itemZepPoint },
+        // { id: "zep", name: "ZEP 포인트 구매권", icon: "🪙", count: result.itemZepPoint },
         { id: "asset", name: "Unity 에셋 구매권", icon: "🎁", count: result.itemUnityAsset },
     ];
 
