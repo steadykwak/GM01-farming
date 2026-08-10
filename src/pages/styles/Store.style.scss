@@ -73,7 +73,7 @@
     // 2. 상품 그리드 (기존 동일)
     .store-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        grid-template-columns: repeat(2, 1fr); // 🌟 2열 고정
         gap: 20px;
 
         .slot {
