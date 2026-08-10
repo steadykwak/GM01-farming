@@ -23,8 +23,9 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
-    "baseUrl": ".",
-    "paths": { "@/*": ["src/*"] }
-  },
+    // "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }  },
   "include": ["vite.config.ts", "src/**/*.tsx", "src/**/*.ts"]
 }
